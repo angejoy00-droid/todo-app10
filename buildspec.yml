@@ -2,7 +2,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - export AWS_ACCOUNT_ID=183071452060
+      - export AWS_ACCOUNT_ID=Your_AWS_Account_ID
       - export AWS_DEFAULT_REGION=ap-northeast-2
       - export IMAGE_REPO_NAME=todo-app10
       - export IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
@@ -19,7 +19,7 @@ phases:
       - "sed -i 's|image: .*todo-app10:.*|image: '$AWS_ACCOUNT_ID'.dkr.ecr.'$AWS_DEFAULT_REGION'.amazonaws.com/'$IMAGE_REPO_NAME':'$IMAGE_TAG'|g' todo_app.yaml"
       - git config user.email "codebuild@ci.local"
       - git config user.name "CodeBuild CI"
-      - git remote set-url origin https://$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@github.com/angejoy00-droid/todo-app10.git
+      - git remote set-url origin https://$GITHUB_TOKEN@github.com/Your_GitHub_Username/todo-app10.git
       - git add todo_app.yaml
       - "git commit -m 'ci: update image to '$IMAGE_TAG' [skip ci]' || echo 'No changes to commit'"
       - git push origin HEAD:main
